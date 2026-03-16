@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,6 +47,8 @@ e.preventDefault();
 
 var name = document.getElementById("name").value;
 var phone = document.getElementById("phone").value;
+var room = document.querySelector("select[name='room']").value;
+var checkin = document.querySelector("input[name='checkin']").value;
 
 fetch(scriptURL,{
 method:"POST",
@@ -55,13 +58,31 @@ body:new FormData(this)
 
 alert("Booking Saved Successfully");
 
-var adminNumber = "918667358514";   // ← உன் WhatsApp number போடு
+// Admin WhatsApp message
+var adminNumber = "918667358514";
 
-var message = "New Hotel Booking%0AName: "+name+"%0APhone: "+phone;
+var adminMessage =
+"New Hotel Booking%0AName: "+name+
+"%0APhone: "+phone+
+"%0ARoom: "+room+
+"%0ACheckin: "+checkin;
 
-var whatsappLink = "https://wa.me/"+adminNumber+"?text="+message;
+var adminLink =
+"https://wa.me/"+adminNumber+"?text="+adminMessage;
 
-window.open(whatsappLink);
+window.open(adminLink);
+
+// Customer confirmation message
+var customerMessage =
+"Hello "+name+
+"%0AYour hotel booking has been received successfully."+
+"%0AOur team will contact you soon."+
+"%0AThank you for choosing our hotel.";
+
+var customerLink =
+"https://wa.me/91"+phone+"?text="+customerMessage;
+
+window.open(customerLink);
 
 this.reset();
 
